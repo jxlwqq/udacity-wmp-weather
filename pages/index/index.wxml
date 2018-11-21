@@ -1,0 +1,40 @@
+<view class="weather-wrapper">
+
+  <button class="location-wrapper" open-type="{{ locationAuthType==1 ? 'openSetting' : ''}}" bindopensetting="onTapLocation" bindtap="onTapLocation" plain="true">
+    <view class="location">
+      <image class='location-icon' src='/images/location-icon.png'></image>
+      <view class='location-text'>{{locationCity}}</view>
+    </view>
+    <view wx:if="{{locationAuthType==0}}" class='location-tips'>点击获取当前位置</view>
+    <view wx:if="{{locationAuthType==1}}" class='location-tips'>点击开启位置权限</view>
+    <view wx:if="{{locationAuthType==2}}" class='location-tips'></view>
+
+  </button>
+
+  <view class="temp">{{now.temp}}°</view>
+  <view class="weather">{{now.weather}}</view>
+  <image class="weather-bg" src="{{now.bg}}" mode="scaleToFill"></image>
+
+  <view class='today-weather' bindtap='onTapDayWeather'>
+    <view class='today-date'>{{today.date}}</view>
+    <view class='today-temp'>{{today.minTemp}}° - {{today.maxTemp}}°</view>
+    <image class='today-arrow' src='/images/arrow.png'></image>
+  </view>
+</view>
+
+
+
+<view class="timetips">
+  <image class="timetips-icon" src="/images/time-icon.png"></image>
+  <view class="timetips-text">未来 24 小时天气预测</view>
+</view>
+
+<scroll-view scroll-x>
+  <view class="forecast-list">
+    <view class="forecast-item" wx:for="{{forecast}}" wx:key>
+      <view class="forecast-time">{{item.time}}</view>
+      <image class="forecast-weather" src="{{item.icon}}"></image>
+      <view class="forecast-temp">{{item.temp}}°</view>
+    </view>
+  </view>
+</scroll-view>
